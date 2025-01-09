@@ -70,7 +70,7 @@ class Product(models.Model):
         return reverse('choboionline:product_detail', args=[self.id, self.slug])
 
     def __str__(self):
-        """
+        """choboionline:''product_detail', args=[self.id]
         Returns a human-readable string representation of the model.
         """
         return self.name
