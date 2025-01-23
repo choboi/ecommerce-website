@@ -4,6 +4,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from orders.models import Order
+from .tasks import payment_completed
 
 logger = logging.getLogger(__name__)
 
@@ -48,5 +49,6 @@ def stripe_webhook(request):
             except Order.DoesNotExist:
                 logger.error(f"Order with id {session['client_reference_id']} does not exist.")
                 return HttpResponse(status=404)
+            payment_completed.delay(order.id)
 
     return HttpResponse(status=200)

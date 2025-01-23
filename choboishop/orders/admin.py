@@ -4,6 +4,7 @@ from django.utils.safestring import mark_safe
 import csv
 import datetime
 from django.http import HttpResponse
+from django.urls import reverse
 
 
 def export_to_csv(modeladmin, request, queryset):
@@ -55,6 +56,19 @@ def order_payment(obj):
     return ''
 
 
+def order_detail(obj):
+    url = reverse('orders:admin_order_detail', args=[obj.id])
+    return mark_safe(f'<a href="{url}">View</a>')
+
+
+def order_pdf(obj):
+    url = reverse('orders:admin_order_pdf', args=[obj.id])
+    return mark_safe(f'<a href="{url}">PDF</a>')
+
+
+order_pdf.short_description = 'Invoice'
+
+
 order_payment.short_description = 'Stripe payment'
 
 
@@ -71,7 +85,9 @@ class OrderAdmin(admin.ModelAdmin):
         'paid',
         'created',
         order_payment,
-        'updated'
+        'updated',
+        order_detail,
+        order_pdf,
     ]
     list_filter = ['paid', 'created', 'updated']
     inlines = [OrderItemInline]
