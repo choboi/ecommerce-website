@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from choboionline.models import Product
+from coupons.models import Coupon
 
 
 class Cart:
@@ -14,6 +15,34 @@ class Cart:
             # Save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
+        # Store the current applied coupon
+        self.coupon_id = self.session.get('coupon_id')
+
+    @property
+    def coupon(self):
+        """
+        Retrieve the Coupon object associated with the cart.
+        """
+        if self.coupon_id:
+            try:
+                return Coupon.objects.get(id=self.coupon_id)
+            except Coupon.DoesNotExist:
+                pass
+        return None
+
+    def get_discount(self):
+        """
+        Calculate the discount amount based on the coupon.
+        """
+        if self.coupon:
+            return (self.coupon.discount / Decimal(100)) * self.get_total_price()
+        return Decimal(0)
+
+    def get_total_price_after_discount(self):
+        """
+        Calculate the total price after applying the discount.
+        """
+        return self.get_total_price() - self.get_discount()
 
     def add(self, product, quantity=1, override_quantity=False):
         """
