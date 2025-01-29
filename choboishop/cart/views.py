@@ -4,6 +4,7 @@ from choboionline.models import Product
 from .cart import Cart
 from .forms import CartAddProductForm
 from coupons.forms import CouponApplyForm
+from choboionline.recommender import Recommender
 
 
 @require_POST
@@ -70,7 +71,17 @@ def cart_detail(request):
     # Initialize the coupon application form (outside the loop)
     coupon_apply_form = CouponApplyForm()
 
+    r = Recommender()
+    cart_products = [item['product'] for item in cart]
+
+    # Ensure logic stays inside the function
+    if cart_products:
+        recommended_products = r.suggest_products_for(cart_products, max_results=4)
+    else:
+        recommended_products = []  # Empty list if no products are in the cart
+
     return render(request, 'cart/detail.html', {
         'cart': cart,
         'coupon_apply_form': coupon_apply_form,
+        'recommended_products': recommended_products,  # Pass recommended products to the template
     })

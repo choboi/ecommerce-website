@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from orders.models import Order
 from .tasks import payment_completed
+from choboionline.models import Product
+from choboionline.recommender import Recommender
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +48,11 @@ def stripe_webhook(request):
                 order.paid = True
                 order.stripe_id = session.payment_intent
                 order.save()
+                # save items bought for product recommendations
+                product_ids = order.items.values_list('product_id')
+                products = Product.objects.filter(id__in=product_ids)
+                r = Recommender()
+                r.products_bought(products)
             except Order.DoesNotExist:
                 logger.error(f"Order with id {session['client_reference_id']} does not exist.")
                 return HttpResponse(status=404)
