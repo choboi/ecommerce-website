@@ -12,12 +12,12 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RenameIndex(
             model_name='category',
-            new_name='choboionlin_name_6b5128_idx',
+            new_name='choboionline_name_6b5128_idx',
             old_name='choboionline_name_6b5128_idx',
         ),
         migrations.RenameIndex(
             model_name='product',
-            new_name='choboionlin_id_cbceb7_idx',
+            new_name='choboionline_id_cbceb7_idx',
             old_name='choboionline_id_cbceb7_idx',
         ),
     ]
