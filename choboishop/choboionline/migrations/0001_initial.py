@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'ordering': ['name'],
-                'indexes': [models.Index(fields=['id', 'slug'], name='choboionline_id_cbceb7_idx'), models.Index(fields=['name'], name='choboionlin_name_adb6d0_idx'), models.Index(fields=['-created'], name='choboionlin_created_515fae_idx')],
+                'indexes': [models.Index(fields=['id', 'slug'], name='choboionline_id_cbceb7_idx'), models.Index(fields=['name'], name='choboionline_name_adb6d0_idx'), models.Index(fields=['-created'], name='choboionlin_created_515fae_idx')],
             },
         ),
     ]

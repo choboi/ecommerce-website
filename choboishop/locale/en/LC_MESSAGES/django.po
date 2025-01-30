@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-29 14:07+0100\n"
+"PO-Revision-Date: 2025-01-29 13:37+0000\n"
+"Last-Translator:   <muhammadabba9741@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
+
+#: .\cart\forms.py:11
+msgid "Quantity"
+msgstr ""
+
+#: .\choboionline\templates\shop\base.html:6
+#: .\choboionline\templates\shop\base.html:11
+msgid "Choboishop"
+msgstr ""
+
+#: .\choboionline\templates\shop\base.html:17
+msgid "Your cart"
+msgstr ""
+
+#: .\choboionline\templates\shop\base.html:19
+#, python-format
+msgid ""
+"\n"
+"        %(items)s item, $%(total)s\n"
+"    "
+msgid_plural ""
+"\n"
+"        %(items)s items, $%(total)s\n"
+"    "
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\choboionline\templates\shop\base.html:26
+msgid "Your cart is empty."
+msgstr ""
+
+#: .\choboionline\templates\shop\product\detail.html:19
+msgid "Add to cart"
+msgstr ""
+
+#: .\choboionline\templates\shop\product\detail.html:24
+msgid "People who bought this also bought"
+msgstr ""
+
+#: .\choboishop\settings.py:159
+msgid "English"
+msgstr ""
+
+#: .\choboishop\settings.py:160
+msgid "Spanish"
+msgstr ""
+
+#: .\choboishop\urls.py:27
+msgid "cart/"
+msgstr ""
+
+#: .\choboishop\urls.py:28
+msgid "orders/"
+msgstr ""
+
+#: .\choboishop\urls.py:29
+msgid "payment/"
+msgstr ""
+
+#: .\choboishop\urls.py:30
+msgid "coupons/"
+msgstr ""
+
+#: .\coupons\forms.py:6
+msgid "Coupon"
+msgstr ""
+
+#: .\payment\urls.py:8
+msgid "process/"
+msgstr ""
+
+#: .\payment\urls.py:9
+msgid "completed/"
+msgstr ""
+
+#: .\payment\urls.py:10
+msgid "canceled/"
+msgstr ""

@@ -1,18 +1,24 @@
 from django.db import models
 from django.urls import reverse
+from parler.models import TranslatableModel, TranslatedFields
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=200, verbose_name="Category Name")
-    slug = models.SlugField(max_length=200, unique=True, verbose_name="Category Slug")
+class Category(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=200, verbose_name="Category Name"),
+        slug=models.SlugField(max_length=200, unique=True, verbose_name="Category Slug"),
+    )
 
     class Meta:
-        ordering = ['name']
-        indexes = [
-            models.Index(fields=['name']),
-        ]
+       # ordering = ['name']
+       # indexes = [
+       #    models.Index(fields=['name']),
+       # ]
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.name
 
     def get_absolute_url(self):
         """
@@ -29,21 +35,23 @@ class Category(models.Model):
         return self.name
 
 
-class Product(models.Model):
+class Product(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=200),
+        slug=models.SlugField(max_length=200),
+        description=models.TextField(blank=True)
+    )
     category = models.ForeignKey(
         Category,
         related_name='products',
         on_delete=models.CASCADE,
         verbose_name="Category"
     )
-    name = models.CharField(max_length=200, verbose_name="Product Name")
-    slug = models.SlugField(max_length=200, unique=True, verbose_name="Product Slug")
     image = models.ImageField(
         upload_to='products/%Y/%m/%d',
         blank=True,
         verbose_name="Product Image"
     )
-    description = models.TextField(blank=True, verbose_name="Description")
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
@@ -54,10 +62,10 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name="Updated At")
 
     class Meta:
-        ordering = ['name']
+       # ordering = ['name']
         indexes = [
-            models.Index(fields=['id', 'slug']),
-            models.Index(fields=['name']),
+          #  models.Index(fields=['id', 'slug']),
+          #  models.Index(fields=['name']),
             models.Index(fields=['-created']),
         ]
         verbose_name = 'Product'
